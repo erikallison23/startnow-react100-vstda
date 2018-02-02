@@ -1,34 +1,36 @@
 import React, { Component } from 'react';
 
 class TodoAdd extends Component {
-
+//sets the state for the todoAdd component
     constructor(props) {
         super(props);
         this.state = {
             inputText: props.todoList.text,
             priority: props.todoList.priority
         }
-
+//binds functions to this.
         this.onInputChange = this.onInputChange.bind(this);
         this.save = this.save.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.editTodo = this.editTodo.bind(this);
     }
-
+//function for the change of input text.
     onInputChange(e) {
         this.setState({ inputText: e.target.value });
     };
-
+//function for the priority change.
     onSelectChange(e) {
         this.setState({ priority: e.target.value });
     }
+//function for the save button.   
     save(e) {
         this.props.save(this.state.inputText, this.state.priority);
     }
+//function for the edit button.    
     editTodo(e) {
         this.props.edit(e);
     }
-
+//renders the TodoAdd component.
     render() {
         // alerts and the 3 types(colors included)
         let alert = {
@@ -37,7 +39,7 @@ class TodoAdd extends Component {
             1: "alert-success no margin",
             0: "aler-primary no margin"
         };
-
+//returns the jsx for the TodoAdd component.
         return (
 
             <div>

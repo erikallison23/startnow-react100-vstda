@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import TodoAdd from './TodoAdd';
 
+//global counter keeps track of every todo's id, created or deleted until page is refreshed.
 var count = 0;
 
+//constructor, props and state are defined.
 class App extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +13,7 @@ class App extends Component {
       inputText: '',
       todoList: [],
     }
+//all of the function are being binded to this.
     this.onClick = this.onClick.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.selectOnChange = this.selectOnChange.bind(this);
@@ -18,7 +21,7 @@ class App extends Component {
     this.editTodo = this.editTodo.bind(this);
     this.saveTodo = this.saveTodo.bind(this);
   };
-
+//on click function created a copy of the state and creates a new state.
   onClick() {
     let todoListCopy = this.state.todoList.slice();
     count++;
@@ -31,15 +34,15 @@ class App extends Component {
 
     this.setState({ todoList: todoListCopy });
   };
-
+//function that changes the text in the input text box.
   onInputChange(e) {
     this.setState({ inputText: e.target.value });
   };
-
+//function that changes the priority.
   selectOnChange(event) {
     this.setState({ priority: event.target.value });
   };
-
+//function that deletes a list item.
   deleteTodo(i) {
     let todoListCopy = this.state.todoList.slice();
 
@@ -47,7 +50,7 @@ class App extends Component {
 
     this.setState({ todoList: todoListCopy });
   };
-
+//function that edits a todo item.
   editTodo(e) {
     let index = parseInt(e.currentTarget.id);
     let newList = this.state.todoList.slice();
@@ -60,7 +63,7 @@ class App extends Component {
       todoList: newList,
     })
   };
-
+//fucntion that saves a todo item after it's been edited.
   saveTodo(i, id, text, priority) {
     let todoListCopy = this.state.todoList.slice();
 
@@ -75,14 +78,15 @@ class App extends Component {
     this.setState({ todoList: todoListCopy });
 
   };
-
+//Renders the app component 
   render() {
     let bulletedtodoList = this.state.todoList.map((e, i) => {
+//returns the TodoAdd component
       return (
         <TodoAdd key={i} id={e.id} todoList={e} delete={() => this.deleteTodo(i)} edit={this.editTodo} save={(text, priority) => this.saveTodo(i, e.id, text, priority)} />
       );
     });
-
+//returns the app component JSX.
     return (
       <div className='container'>
         <h1>Very Simple Todo App</h1>
@@ -118,10 +122,6 @@ class App extends Component {
           <div className='col-md-8'>
             <div className='card' id='card-2'>
               <div className='card-header' id='header-2'>View Todos</div>
-              {/*  <label className='label'>Welcome to Very Simple Todo App!</label>
-              <br />
-              <label className='label'>Get started now by adding a new todo on the left.</label>
-              <br /> */}
               {this.state.todoList.length === 0 ? '  Welcome to Very Simple Todo App! Get started now by adding a new todo on the left. ' : <ul>{bulletedtodoList}</ul>}
             </div>
           </div>
