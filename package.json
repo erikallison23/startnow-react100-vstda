@@ -1,6 +1,6 @@
 {
   "name": "vstda",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "REACT100 Assignment - VSTDA",
   "main": "server/index.js",
   "scripts": {
@@ -14,6 +14,7 @@
     "axios": "^0.16.1",
     "bluebird": "^3.5.0",
     "chai": "^3.5.0",
+    "electron": "^1.8.2",
     "expect": "^1.20.2",
     "express": "^4.15.3",
     "json-loader": "^0.5.4",
